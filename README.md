@@ -89,10 +89,11 @@ This process can take up to 10 minutes, depending on the processing capability o
 
 Get the `AUTH_KEY` used in the installation:
 ```
-cat ./openwhisk-src/ansible/files/auth.guest
+cat ./openwhisk-src/ansible/files/auth.guest`
 ```
 
 ## References
 
-https://gist.github.com/npearce/6f3c7826c7499587f00957fee62f8ee9
-https://linuxize.com/post/how-to-install-node-js-on-centos-7/
+- https://gist.github.com/npearce/6f3c7826c7499587f00957fee62f8ee9
+- https://linuxize.com/post/how-to-install-node-js-on-centos-7/
+- https://gist.github.com/npearce/13d4d4c72bd4781b96a0a811ffbc454d
