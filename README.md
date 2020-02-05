@@ -119,7 +119,7 @@ brew install wskdeploy
 
 For installations on other OS, please visit [https://openwhisk.apache.org/documentation.html#wsk-cli](https://openwhisk.apache.org/documentation.html).
 
-## Configuring wsk
+## Configuring `wsk` to connect to your OpenWhisk Installation
 In order to configure WSK, you will need the following information handly:
 
 - IP address of your server
@@ -129,6 +129,107 @@ Example usage:
 ```
 wsk -i property set --apihost API_HOST --auth AUTH_KEY
 ```
+
+## Creating a Function
+The TWO most important files when creating a function in OpenWhisk are:
+
+- manifest.yml
+- source code of the function which can be on one of the supported languages
+
+## Deploying a Function
+
+The `wskdeploy` cli tool uses the settings configured in the `wsk` CLI tool to deploy to the OpenWhisk installation.
+
+Using the `--strict` flag will override the OpenWhisk runtime mapping, and strictly follow what is specified in the menifest file.
+
+Example:
+```
+wskdeploy -m manifest.yml --strict
+```
+
+After deploying, it is important to test the function. This can be done via the following command:
+
+```
+wsk -i action invoke /guest/hello_world_package/hello_world --result --param name Darren --param place "Bedok, Singapore"
+```
+
+This will result in the following output:
+
+```
+{
+    "greeting": "Hello, Darren from Bedok, Singapore"
+}
+```
+
+To increase the verbosity of the output, the `-v` flag can be used.
+
+Example:
+```
+wsk -i action invoke /guest/hello_world_package/hello_world --result --param name Darren --param place "Bedok, Singapore" -v
+```
+
+Results:
+```
+REQUEST:
+[POST]	https://0.0.0.0/api/v1/namespaces/guest/actions/hello_world_package/hello_world?blocking=true&result=true
+Req Headers
+{
+  "Authorization": [
+    "Basic XXX"
+  ],
+  "Content-Type": [
+    "application/json"
+  ],
+  "User-Agent": [
+    "OpenWhisk-CLI/1.0 (not set) darwin amd64"
+  ]
+}
+Req Body
+{"name":"Darren","place":"Bedok, Singapore"}
+
+RESPONSE:Got response with code 200
+Resp Headers
+{
+  "Access-Control-Allow-Headers": [
+    "Authorization, Origin, X-Requested-With, Content-Type, Accept, User-Agent"
+  ],
+  "Access-Control-Allow-Methods": [
+    "GET, DELETE, POST, PUT, HEAD"
+  ],
+  "Access-Control-Allow-Origin": [
+    "*"
+  ],
+  "Connection": [
+    "keep-alive"
+  ],
+  "Content-Length": [
+    "50"
+  ],
+  "Content-Type": [
+    "application/json"
+  ],
+  "Date": [
+    "Wed, 05 Feb 2020 06:51:09 GMT"
+  ],
+  "Server": [
+    "openresty/1.13.6.2"
+  ],
+  "X-Openwhisk-Activation-Id": [
+    "XXX"
+  ],
+  "X-Request-Id": [
+    "XXX"
+  ]
+}
+Response body size is 50 bytes
+Response body received:
+{"greeting":"Hello, Darren from Bedok, Singapore"}
+{
+    "greeting": "Hello, Darren from Bedok, Singapore"
+}
+```
+
+This is extremely useful during development time.
 
 ## References
 
