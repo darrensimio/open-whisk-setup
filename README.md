@@ -91,6 +91,7 @@ Get the `AUTH_KEY` used in the installation:
 ```
 cat ./openwhisk-src/ansible/files/auth.guest`
 ```
+This key is required to configure the OpenWhisk CLI to communicate with your OpenWhisk installation.
 
 ## References
 
