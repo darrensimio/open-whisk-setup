@@ -93,6 +93,43 @@ cat ./openwhisk-src/ansible/files/auth.guest`
 ```
 This key is required to configure the OpenWhisk CLI to communicate with your OpenWhisk installation.
 
+## Setup OpenWhisk CLI
+
+### WSK
+
+The CLI took for OpenWhisk is [wsk](https://github.com/apache/openwhisk/blob/master/docs/cli.md#openwhisk-cli). It supports Linux, Mac, and Windows.
+
+Install `wsk` on MacOS:
+```
+brew update
+brew install wsk
+```
+
+For installations on other OS, please visit [https://openwhisk.apache.org/documentation.html#wsk-cli](https://openwhisk.apache.org/documentation.html).
+
+### WSKDeploy
+
+The command line tool for deploying to OpenWhisk is [wskdeploy](https://github.com/apache/openwhisk-wskdeploy/blob/master/README.md).
+
+Install `wskdeploy` on MacOS:
+```
+brew update
+brew install wskdeploy
+```
+
+For installations on other OS, please visit [https://openwhisk.apache.org/documentation.html#wsk-cli](https://openwhisk.apache.org/documentation.html).
+
+## Configuring wsk
+In order to configure WSK, you will need the following information handly:
+
+- IP address of your server
+- AUTH_KEY (instructions on the `Installing OpenWhisk` section)
+
+Example usage:
+```
+wsk -i property set --apihost API_HOST --auth AUTH_KEY
+```
+
 ## References
 
 - https://gist.github.com/npearce/6f3c7826c7499587f00957fee62f8ee9
